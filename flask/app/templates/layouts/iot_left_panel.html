@@ -1,0 +1,5 @@
+<h3 class="my-4">IOT Example</h3>
+<div class="list-group">
+    <a href="{{ url_for('iot') }}" class="list-group-item list-group-item {% if request.path == '/iot' %} active {% endif %}">Vizualizar</a>
+    <a href="{{ url_for('check_iot') }}" class="list-group-item list-group-item {% if request.path == '/checking-iot' %} active {% endif %}">Integridade</a>
+</div>

@@ -1,0 +1,75 @@
+{% extends './layouts/base.html' %}
+{% block content %}
+    {% if values|length >= 1 %}
+        {% set tamanho_medio = totals['total_size']/values|length %}
+        {% set numero_blocos_possiveis = totals['free_size_in_KB']*1000/tamanho_medio %}
+        {% set tamanho_blockChain = totals['total_size']*0.001 %}
+        {% set espaco_livre_em_MB = totals['free_size_in_KB']*0.001 %}
+        <div class="row mt-3 d-flex justify-content-around">
+          <div class="col-sm-6">
+            <div class="card text-center h-100">
+              <div class="card-body align-items-center d-flex justify-content-center">
+                <h5 class="card-text">Espaço Livre: {{ "%.0f"|format(totals['free_size_in_KB']*0.001) }} MB</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card text-center h-100">
+              <div class="card-body align-items-center d-flex justify-content-center">
+                <h5 class="card-text">Numero Blocos Possiveis: {{ "%.0f"|format(numero_blocos_possiveis) }} </h5>
+              </div>
+            </div>
+          </div>
+      </div>
+        <div class="row mt-3 d-flex justify-content-around">
+          <div class="col-sm-4">
+            <div class="card text-center h-100">
+              <div class="card-body align-items-center d-flex justify-content-center">
+                <h5 class="card-text">Tamanho BlockChain: {{ "%.3f"|format(tamanho_blockChain) }} KB</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card text-center h-100">
+              <div class="card-body align-items-center d-flex justify-content-center">
+                <h5 class="card-text">Tamanho Médio Bloco: {{ "%.0f"|format(tamanho_medio) }} B</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card text-center h-100">
+              <div class="card-body align-items-center d-flex justify-content-center">
+                <h5 class="card-text">Total Nonce: {{ totals['nonce'] }} </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card ml-3 mx-auto mt-2">
+            <div class="container">
+                <form class="" action="{{ url_for('iot') }}" method="post" hidden>
+                    <input type="text" class="form-control" placeholder="Nome" name="temp" value="{{ request.form.get('temp', '') }}">
+                    <input type="text" class="form-control" placeholder="Nome" name="hum" value="{{ request.form.get('hum', '') }}">
+                    <input type="text" class="form-control" placeholder="Nome" name="time" value="{{ request.form.get('time', '') }}">
+                    <input type="text" class="form-control" placeholder="Nome" name="date" value="{{ request.form.get('date', '') }}">
+                </form>
+        <div class="row">
+          {% for value in values %}
+              <div class="card text-center d-flex justify-content-start mr-1 ml-1 mt-1 mb-1">
+                <div class="card-body">
+                  <div class="card-header">
+                    <h5 class="card-title">Bloco {{ value['block'] }}</h5>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Temp: {{ value['temp'] }} ºC</li>
+                    <li class="list-group-item">Hum: {{ value['hum']}}</li>
+                    <li class="list-group-item">Date: {{ value['date'] }}</li>
+                    <li class="list-group-item">Time: {{ value['time']}}</li>
+                  </ul>
+                </div>
+              </div>
+          {% endfor %}
+        </div>
+    {%else%}
+        <h3>Não Existem Items</h3>
+    {%endif%}
+{% endblock %}

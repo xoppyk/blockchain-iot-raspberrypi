@@ -1,0 +1,8 @@
+<h3 class="my-4">BlockChain List</h3>
+<div class="list-group">
+    <!-- <a href="#" class="list-group-item" {% if request.url_rule.endpoint == "home" %}class="active"{% endif %}>Criar Bloco</a> -->
+    <a href="{{ url_for('create') }}" class="list-group-item list-group-item {% if request.path == '/create' %} active {% endif %}">Criar Bloco</a>
+    <a href="{{ url_for('view') }}" class="list-group-item {% if request.path == '/view' %} active {% endif %}" >Vizualizar</a>
+    <!-- <a href="#" class="list-group-item">Visualizar</a> -->
+    <a href="{{ url_for('integrity') }}" class="list-group-item list-group-item {% if request.path == '/integrity' %} active {% endif %}">Integridade</a>
+</div>

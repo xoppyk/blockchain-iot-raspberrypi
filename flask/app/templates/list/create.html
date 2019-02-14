@@ -1,0 +1,30 @@
+{% extends './layouts/base.html' %}
+
+{% block content %}
+<div class="card ml-3 mx-auto mt-5">
+    <div class="container">
+        <h4 class="mt-3"> Criar Novo Bloco</h4>
+        <hr>
+
+        <form action="{{ url_for('create') }}" method="POST" class="mb-3">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Quem ?</label>
+                <input type="text" class="form-control" placeholder="Nome" name="name" value="{{ request.form.get('name', '') }}">
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Quanto ?</label>
+                <input type="text" class="form-control" placeholder="Valor" name="amount" value="{{ request.form.get('amount', '') }}">
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Para Quem ?</label>
+                <input type="text" class="form-control" placeholder="Nome" name="to_whom" value="{{ request.form.get('to_whom', '') }}">
+            </div>
+            <hr>
+            <button type="submit" class="btn btn-primary">Criar Bloco</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BlockChain</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.css') }}">
+</head>
+<body>
+    {% include './layouts/navbar.html' %}
+
+    {% if active == 'list' %}
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    {% include './layouts/left_panel.html' %}
+                </div>
+                <div class="col-lg-9">
+    {% endif %}
+    {%if active == 'iot' %}
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    {% include './layouts/iot_left_panel.html' %}
+                </div>
+                <div class="col-lg-9">
+    {% endif %}
+                    {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

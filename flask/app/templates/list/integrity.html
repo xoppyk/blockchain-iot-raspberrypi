@@ -1,0 +1,27 @@
+{% extends './layouts/base.html' %}
+{% block content %}
+<div class="card ml-3 mx-auto mt-5">
+    <div class="container">
+        <div class="row d-flex justify-content-start">
+            {% if results|length >= 1 %}
+                {% for res in results %}
+                    {% if res['result'] == "Corrupted" %}
+                        <div class="card text-center ml-2 mr-2 mt-2 mb-2 border-danger">
+                    {%else%}
+                        <div class="card text-center ml-2 mr-2 mt-2 mb-2">
+                    {%endif%}
+                    <div class="card-header">
+                        Bloco {{ res['block'] }}
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ res['result'] }}</h4>
+                    </div>
+                    </div>
+                {% endfor %}
+            {%else%}
+                <h3>Não Existem Items</h3>
+            {%endif%}
+        </div>
+    </div>
+</div>
+{% endblock %}
